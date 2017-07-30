@@ -1,0 +1,11 @@
+[eng-rhel-7]
+baseurl = http://download.devel.redhat.com/rel-eng/repos/eng-rhel-7/$basearch/
+enabled = 1
+gpgcheck = 0
+name = ENG Internal - $releasever - $basearch
+
+[eng-rhel-7-src]
+baseurl = http://download.devel.redhat.com/rel-eng/repos/eng-rhel-7/src
+enabled = 0
+gpgcheck = 0
+name = ENG Internal Source - $releasever - $basearch
