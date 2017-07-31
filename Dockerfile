@@ -1,16 +1,16 @@
 FROM centos:latest
 
-#ADD Files/eng-rhel.repo /etc/yum.repos.d/
+ADD Files/eng-rhel.repo /etc/yum.repos.d/
 
 #ARG resultsdb_updater_rpm
 #COPY $resultsdb_updater_rpm /tmp
 
-#RUN yum install -y epel-release && \
-#    yum update -y && \
-#    yum install -y /tmp/$(basename $resultsdb_updater_rpm) && \
-#    yum -y clean all && \
-    #yum install -y resultsdb-updater && \
-#    chmod -R 777 /etc/fedmsg.d/
+RUN yum install -y epel-release && \
+    yum update -y && \
+    #yum install -y /tmp/$(basename $resultsdb_updater_rpm) && \
+    yum -y clean all && \
+    yum install -y resultsdb-updater && \
+    chmod -R 777 /etc/fedmsg.d/
 
 #ADD Files /home/
  
