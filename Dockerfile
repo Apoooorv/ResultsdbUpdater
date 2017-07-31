@@ -1,15 +1,15 @@
 FROM centos:latest
 
 #ADD Files/eng-rhel.repo /etc/yum.repos.d/
-ADD resultsdb-updater-2.4.0-1.el7eng.noarch.rpm /tmp/
+#ADD resultsdb-updater-2.4.0-1.el7eng.noarch.rpm /tmp/
 ADD Files /home/
-#ARG resultsdb_updater_rpm
-#COPY $resultsdb_updater_rpm /tmp
+ARG resultsdb_updater_rpm
+COPY $resultsdb_updater_rpm /tmp
 
 RUN yum install -y epel-release && \
-    yum install -y /tmp/resultsdb-updater-2.4.0-1.el7eng.noarch.rpm && \
+    #yum install -y /tmp/resultsdb-updater-2.4.0-1.el7eng.noarch.rpm && \
     yum update -y && \
-    #yum install -y /tmp/$(basename $resultsdb_updater_rpm) && \
+    yum install -y /tmp/$(basename $resultsdb_updater_rpm) && \
     yum -y clean all && \
     #yum install -y resultsdb-updater && \
     chmod -R 777 /etc/fedmsg.d/ 
