@@ -2,8 +2,8 @@ FROM centos:latest
 
 #ADD Files/eng-rhel.repo /etc/yum.repos.d/
 
-ARG resultsdb_updater_rpm
-COPY $resultsdb_updater_rpm /tmp
+#ARG resultsdb_updater_rpm
+#COPY $resultsdb_updater_rpm /tmp
 
 #RUN yum install -y epel-release && \
 #    yum update -y && \
