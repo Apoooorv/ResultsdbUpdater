@@ -1,0 +1,37 @@
+#Resultsdb_updater template
+---
+apiVersion: v1
+kind: Template
+metadata:
+  name: resultsdb-updater
+parameters:
+- name: RESULTSDB_UPDATER_USER_NAME
+  displayName: Resultsdb updater user name
+  description: Username for resultsdb-updater.py file
+  required: true
+- name: RESULTSDB_UPDATER_USER_PASSWORD
+  displayName: Resultsdb updater user password
+  description: Password for resultsdb-updater.py file
+  required: true
+objects:
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata: 
+    name: resultdb-updater
+  spec:
+    replicas: 2
+    selector:
+      environment: resultsdb-updater
+    template:
+      metadata:
+        labels:
+          environment: resultsdb-updater
+      spec:
+        containers:
+        - name: resultsdb-updater
+          image: 172.30.1.1:5000/myproject/resultsdb_updater:latest
+          env: 
+          - name: RESULTSDB_UPDATER_USER_NAME
+            value: $RESULTSDB_UPDATER_USER_NAME
+          - name: RESULTSDB_UPDATER_USER_PASSWORD
+            value: $RESULTSDB_UPDATER_USER_PASSWORD
