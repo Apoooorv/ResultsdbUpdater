@@ -19,7 +19,7 @@ objects:
   metadata: 
     name: resultdb-updater
   spec:
-    replicas: 2
+    replicas: 4
     selector:
       environment: resultsdb-updater
     template:
@@ -27,11 +27,17 @@ objects:
         labels:
           environment: resultsdb-updater
       spec:
+        volumes:
+        - name: volume-sl069
+          emptyDir: {}
         containers:
         - name: resultsdb-updater
-          image: 172.30.1.1:5000/myproject/resultsdb_updater:latest
+          image: 172.30.1.1:5000/myproject/resultsdb-updater@sha256:fef3bfb41bd97fa548b35e6ccc6ae1db0cd74b674efeaee45d621992de1f2b27
           env: 
-          - name: RESULTSDB_UPDATER_USER_NAME
-            value: $RESULTSDB_UPDATER_USER_NAME
-          - name: RESULTSDB_UPDATER_USER_PASSWORD
-            value: $RESULTSDB_UPDATER_USER_PASSWORD
+          - name: RESULTSDB_USERNAME
+            value: "${RESULTSDB_UPDATER_USER_NAME}"
+          - name: RESULTSDB_PASSWORD
+            value: "${RESULTSDB_UPDATER_USER_PASSWORD}"
+          volumeMounts:
+          - name: volume-sl069
+            mountPath: /etc/resultsdb-updater
